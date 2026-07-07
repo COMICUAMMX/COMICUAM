@@ -1,12 +1,32 @@
 package com.dsge.comicuam.modelos;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("usuario")
 public class Usuario {
-    private String id;
+
+    @Id
+    private Long id;
     private String nombre;
     private boolean esSuscriptor;
 
+    public Long getId() {
+        return id;
+    }
 
-    // Constructor
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public boolean isEsSuscriptor() {
         return esSuscriptor;
     }

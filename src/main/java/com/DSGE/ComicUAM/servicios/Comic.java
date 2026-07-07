@@ -1,3 +1,5 @@
+package com.dsge.comicuam.servicios;
+
 public class Comic {
     public String titulo;
     public String genero;
