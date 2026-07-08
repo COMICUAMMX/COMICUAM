@@ -1,0 +1,171 @@
+/* ==========================================
+   RESET & CONFIGURACIÓN BASE
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), 
+                url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-b8b0-f3ef8ff2168d/ab510a3b-ee39-444e-a5a5-257b5fa16df0/MX-es-20220502-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   NAVBAR (HEADER CON LOGO)
+   ========================================== */
+.netflix-navbar {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4%;
+    z-index: 1000;
+}
+
+.netflix-navbar .logo img {
+    height: 45px; /* Ajusta el tamaño de tu logo.jpeg */
+    object-fit: contain;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL Y CENTRADO
+   ========================================== */
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 100px 20px 40px 20px; /* Margen superior para no chocar con la navbar */
+}
+
+/* La tarjeta traslúcida del formulario */
+.register-section {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 50px 45px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.register-section h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #fff;
+}
+
+/* ==========================================
+   CAMPOS DEL FORMULARIO (INPUTS)
+   ========================================== */
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+/* Etiquetas sutiles arriba de cada input */
+.form-group label {
+    font-size: 0.85rem;
+    color: #8c8c8c;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333333;
+    color: #ffffff;
+    font-size: 16px;
+    transition: background-color 0.2s;
+}
+
+.form-group input:focus {
+    background-color: #454545;
+    outline: none;
+}
+
+/* ==========================================
+   BOTÓN ROJO Y ENLACES INFERIORES
+   ========================================== */
+.btn-primary {
+    width: 100%;
+    height: 48px;
+    background-color: #e50914; /* Rojo Netflix */
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 4px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #d06711;
+}
+
+/* Texto para redirigir al login */
+.register-section p {
+    margin-top: 30px;
+    color: #737373;
+    font-size: 0.95rem;
+}
+
+.register-section p a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.register-section p a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================
+   RESPONSIVE PARA PANTALLAS MÓVILES
+   ========================================== */
+@media (max-width: 500px) {
+    .register-section {
+        padding: 35px 25px;
+    }
+}
