@@ -8,8 +8,8 @@
 		<version>3.5.16</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.DSGE</groupId>
-	<artifactId>ComicUAM</artifactId>
+	<groupId>com.dsge</groupId>
+	<artifactId>comicuam</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>
