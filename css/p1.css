@@ -83,9 +83,13 @@ body {
    ========================================== */
 .hero-banner {
     position: relative;
-    height: 85vh;
-    color: #fff;
-    margin-bottom: 20px;
+    width: 100%;
+    height: 75vh; /* Ocupa el 75% del alto de la pantalla */
+    display: flex;
+    align-items: center; /* Centra el contenido verticalmente */
+    padding-left: 4%;
+    margin-bottom: 30px; /* Empuja la primera fila de cómics hacia abajo */
+    background-color: #000; /* Fondo negro por si la imagen tarda en cargar */
 }
 
 .hero-background {
@@ -105,15 +109,29 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.6) 30%, transparent 70%),
-                linear-gradient(to top, #141414, transparent 50%);
-    z-index: -1;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.8) 30%, transparent 70%),
+                linear-gradient(to top, #141414 10%, transparent 40%);
+    z-index: 1;
 }
 
 .hero-content {
-    padding-left: 4%;
-    padding-top: 25vh;
+    z-index: 2;
     max-width: 600px;
+    margin-top: 80px; /* Despeja el espacio de la navbar */
+}
+.comic-row {
+    width: 100%;
+    padding: 0 4%;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 5; /* Asegura que se dibuje por encima de cualquier fondo residual */
+    clear: both; /* Rompe cualquier flotado extraño anterior */
+}
+.comic-row h2 {
+    font-size: 1.5rem;
+    color: #e5e5e5;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .hero-title {
@@ -217,13 +235,13 @@ body {
    LOGIN
    ========================================== */
 
-.main-container{
-    width: 100%;
-    min-height: 100vh;
+.main-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 80px; /* Evita que el navbar tape el contenido */
+    flex-direction: column;
+    width: 100%;
+    background-color: #141414;
+    /* Dejamos un margen arriba para que la navbar fija de 68px no tape el contenido */
+    padding-top: 0; 
 }
 
 .login-container{
@@ -309,5 +327,37 @@ body {
 .register-link a:hover{
     text-decoration: underline;
 }
-=======
->>>>>>> ca25b3d72051c2b5bad09ff65f1ef7e1484d99b4
+/* Asegura que cualquier imagen dentro de una tarjeta ocupe el 100% de su ancho y alto asignado */
+.comic-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen elegantemente para que no se deforme ni se estire */
+    border-radius: 4px; /* Bordes redondeados sutiles estilo Netflix */
+    display: block;
+}
+
+/* Por si acaso, asegúrate de que tus tarjetas tengan un tamaño fijo en el carrusel */
+.comic-card {
+    flex-shrink: 0;
+    width: 200px; /* Controla el ancho de cada tarjeta de cómic */
+    height: 300px; /* Controla el alto de cada tarjeta (proporción vertical para cómics) */
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Efecto Zoom al pasar el mouse por encima */
+.comic-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+.comic-slider {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 15px;
+    padding: 15px 0;
+    align-items: flex-start;
+}
