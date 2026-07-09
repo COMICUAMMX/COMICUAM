@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/p1.css">
     <link rel="stylesheet" href="../css/login.css">
 </head>
+
 <body>
 
     <header class="netflix-navbar">
@@ -30,9 +31,9 @@
 
         <section class="login-container">
 
-            <h1>Iniciar sesión</h1>
+            <h1>Recuperar Conrtaseña</h1>
 
-            <p>Ingresa tus datos para acceder a ComicUAM.</p>
+            <p>Ingresa los datos para recuperar ocntraseña ComicUAM.</p>
 
             <form action="#" method="post">
 
@@ -49,34 +50,42 @@
 
                 </div>
 
+
                 <div class="input-group">
 
-                    <label for="contrasena">Contraseña</label>
+                    <label for="numero_telefonico">Número Telefonico</label>
+
+                    <input
+                        type="numero"
+                        id="numero_tel"
+                        name="numero_tel"
+                        placeholder="Ingresa tu número telefonico"
+                        required>
+                </div>
+
+                <div class="input-group">
+
+                    <label for="Ultima_Contraseña">Ultima Contraseña</label>
 
                     <input
                         type="password"
-                        id="contrasena"
-                        name="contrasena"
-                        placeholder="Ingresa tu contraseña"
+                        id="ultim_pass"
+                        name="ultim_pass"
+                        placeholder="Ingresa la ultima password que recuerdes"
                         required>
-
                 </div>
 
+
+
                 <button class="btn-login" type="submit">
-                    Iniciar sesión
+                    Enviar Codigo de Recuperación
                 </button>
 
             </form>
 
             <div class="register-link">
-                <button class="btn-login" type="submit">
-                    <a href="../register/register.html">Registrarme</a>
-                </button>
-            </div>
-
-            <div class="recuperar-contrasenia-link">
-                ¿No Recuerdo Mi Contraseña?
-                <a href="../login/recuperar.html">Recuperar Contraseña</a>
+                ¿Cancelar la Recuperación?
+                <a href="../login/login.html">Cancelar</a>
             </div>
 
         </section>
