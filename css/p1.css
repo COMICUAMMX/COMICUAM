@@ -84,12 +84,12 @@ body {
 .hero-banner {
     position: relative;
     width: 100%;
-    height: 75vh; /* Ocupa el 75% del alto de la pantalla */
+    height: 75vh;             /* Altura fija para que no floten las cosas a los lados */
     display: flex;
-    align-items: center; /* Centra el contenido verticalmente */
+    align-items: center;
     padding-left: 4%;
-    margin-bottom: 30px; /* Empuja la primera fila de cómics hacia abajo */
-    background-color: #000; /* Fondo negro por si la imagen tarda en cargar */
+    margin-bottom: 40px;      /* Espacio obligatorio para empujar las tarjetas abajo */
+    background-color: #000;
 }
 
 .hero-background {
@@ -111,13 +111,14 @@ body {
     height: 100%;
     background: linear-gradient(to right, rgba(20, 20, 20, 0.8) 30%, transparent 70%),
                 linear-gradient(to top, #141414 10%, transparent 40%);
-    z-index: 1;
+    z-index: 1; /* Mantiene el degradado visible detrás del texto */
 }
 
 .hero-content {
-    z-index: 2;
+    position: relative;
+    z-index: 2;               /* Asegura que el texto y botones queden encima de la capa */
     max-width: 600px;
-    margin-top: 80px; /* Despeja el espacio de la navbar */
+    margin-top: 80px;
 }
 .comic-row {
     width: 100%;
@@ -126,6 +127,38 @@ body {
     position: relative;
     z-index: 5; /* Asegura que se dibuje por encima de cualquier fondo residual */
     clear: both; /* Rompe cualquier flotado extraño anterior */
+}
+.comic-card {
+    flex-shrink: 0;
+    width: 200px;             /* Ancho fijo para que no se desborden */
+    height: 300px;            /* Alto proporcional */
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.comic-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* Evita que la portada se deforme o aplaste */
+    border-radius: 4px;
+    display: block;
+}
+.comic-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+.comic-slider {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 15px;
+    padding: 15px 0;
+    align-items: flex-start;  /* Evita que se estire verticalmente dejando huecos */
+}
+.comic-slider::-webkit-scrollbar {
+    display: none;
 }
 .comic-row h2 {
     font-size: 1.5rem;
@@ -326,38 +359,4 @@ body {
 
 .register-link a:hover{
     text-decoration: underline;
-}
-/* Asegura que cualquier imagen dentro de una tarjeta ocupe el 100% de su ancho y alto asignado */
-.comic-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Recorta la imagen elegantemente para que no se deforme ni se estire */
-    border-radius: 4px; /* Bordes redondeados sutiles estilo Netflix */
-    display: block;
-}
-
-/* Por si acaso, asegúrate de que tus tarjetas tengan un tamaño fijo en el carrusel */
-.comic-card {
-    flex-shrink: 0;
-    width: 200px; /* Controla el ancho de cada tarjeta de cómic */
-    height: 300px; /* Controla el alto de cada tarjeta (proporción vertical para cómics) */
-    position: relative;
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-/* Efecto Zoom al pasar el mouse por encima */
-.comic-card:hover {
-    transform: scale(1.08);
-    z-index: 10;
-}
-.comic-slider {
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    gap: 15px;
-    padding: 15px 0;
-    align-items: flex-start;
 }

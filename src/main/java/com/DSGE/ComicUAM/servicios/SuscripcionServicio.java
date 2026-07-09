@@ -1,20 +1,27 @@
 package com.dsge.comicuam.servicios;
 
 import com.dsge.comicuam.modelos.Usuario;
+import com.dsge.comicuam.repositorios.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SuscripcionServicio {
 
-    // Método para activar suscripción
-    public void activarSuscripcion(Usuario usuario) {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public Usuario activarSuscripcion(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
         usuario.setEsSuscriptor(true);
-        // Aquí se haría un repositorio.save(usuario) para guardarlo en BD
+        return usuarioRepository.save(usuario);
     }
 
-    // Método para cancelar suscripción
-    public void cancelarSuscripcion(Usuario usuario) {
+    public Usuario cancelarSuscripcion(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
         usuario.setEsSuscriptor(false);
-        // Aquí se actualizaría en BD
+        return usuarioRepository.save(usuario);
     }
 }

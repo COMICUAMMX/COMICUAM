@@ -1,4 +1,4 @@
-package com.dsge.comicuam.servicios;
+package com.dsge.comicuam.modelos;
 
 public class Persona {
     private int isUsuario;
