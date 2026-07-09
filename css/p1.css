@@ -212,6 +212,7 @@ body {
     width: 240px;
 }
 
+
 /* ==========================================
    LOGIN
    ========================================== */
@@ -308,3 +309,5 @@ body {
 .register-link a:hover{
     text-decoration: underline;
 }
+=======
+>>>>>>> ca25b3d72051c2b5bad09ff65f1ef7e1484d99b4

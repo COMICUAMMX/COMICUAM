@@ -1,4 +1,4 @@
-package com.DSGE.ComicUAM.servicios;
+package com.dsge.comicuam.servicios;
 
 import java.time.LocalDate;
 
