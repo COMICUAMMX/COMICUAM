@@ -1,0 +1,313 @@
+/* ==========================================
+   RESET & ESTILOS BASE
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #141414; /* El negro clásico de Netflix */
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ==========================================
+   NAVBAR (HEADER)
+   ========================================== */
+.netflix-navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 68px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separa los enlaces del perfil */
+    padding: 0 4%;
+    z-index: 1000;
+    transition: background-color 0.5s;
+}
+
+/* Clase que se añade con JavaScript al hacer scroll */
+.netflix-navbar.scrolled {
+    background-color: #141414;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.netflix-navbar .logo img {
+    height: 25px;
+    vertical-align: middle;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #e5e5e5;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, 
+.nav-links .active {
+    color: #fff;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-right .profile-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* ==========================================
+   HERO / BANNER PRINCIPAL
+   ========================================== */
+.hero-banner {
+    position: relative;
+    height: 85vh;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Degradados para fusionar el banner con el fondo negro */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.6) 30%, transparent 70%),
+                linear-gradient(to top, #141414, transparent 50%);
+    z-index: -1;
+}
+
+.hero-content {
+    padding-left: 4%;
+    padding-top: 25vh;
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.btn-play {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-info {
+    background-color: rgba(109, 109, 110, 0.7);
+    color: #fff;
+}
+
+/* ==========================================
+   FILAS DE PELÍCULAS (ROWS)
+   ========================================== */
+.movie-row {
+    padding: 0 4%;
+    margin-bottom: 40px;
+}
+
+.row-title {
+    font-size: 1.4rem;
+    color: #e5e5e5;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.row-posters {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 20px 0;
+    gap: 10px;
+}
+
+/* Ocultar barra de scroll en navegadores */
+.row-posters::-webkit-scrollbar {
+    display: none;
+}
+.row-posters {
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.poster-item {
+    flex-shrink: 0;
+    width: 200px;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.poster-item:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+/* Variante para posters más grandes en la fila "Originales de Netflix" */
+.poster-large {
+    width: 240px;
+}
+
+
+/* ==========================================
+   LOGIN
+   ========================================== */
+
+.main-container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px; /* Evita que el navbar tape el contenido */
+}
+
+.login-container{
+    width: 420px;
+    background: rgba(0,0,0,0.80);
+    padding: 45px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,.6);
+}
+
+.login-container h1{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.login-container p{
+    color: #b3b3b3;
+    margin-bottom: 30px;
+}
+
+.input-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-group label{
+    margin-bottom: 8px;
+    font-size: .95rem;
+    font-weight: bold;
+}
+
+.input-group input{
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: white;
+    padding: 0 15px;
+    font-size: 1rem;
+}
+
+.input-group input::placeholder{
+    color: #999;
+}
+
+.input-group input:focus{
+    outline: 2px solid #e50914;
+}
+
+.btn-login{
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+    background-color: #e50914;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-login:hover{
+    background-color: #f4a906;
+}
+
+.register-link{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.register-link p{
+    color: #b3b3b3;
+}
+
+.register-link a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover{
+    text-decoration: underline;
+}
+=======
+>>>>>>> ca25b3d72051c2b5bad09ff65f1ef7e1484d99b4
