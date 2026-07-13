@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Suscripción - ComicUAM</title>
+    <!-- Vinculación al CSS en la carpeta estática -->
+    <link rel="stylesheet" href="/css/suscripcion.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+    <header class="dashboard-header">
+        <h2>ComicUAM</h2>
+        <p>Panel de Control de Membresías</p>
+    </header>
+    
+    <main class="dashboard-content">
+        <!-- Tarjeta de Estado Actual -->
+        <div class="card status-card">
+            <h3>Estado de tu Cuenta</h3>
+            <p class="info-text">Ingresa el ID de tu suscripción actual para realizar cambios en el sistema.</p>
+            
+            <div class="form-group">
+                <label for="suscripcionId">ID de tu Suscripción:</label>
+                <input type="number" id="suscripcionId" placeholder="Ej: 1" min="1">
+            </div>
+        </div>
+
+        <!-- Tarjeta de Acciones -->
+        <div class="card actions-card">
+            <h3>Gestión de Membresía</h3>
+            <p class="description">Puedes reactivar tus beneficios o solicitar la baja de tu renovación automática en cualquier momento.</p>
+            
+            <div class="button-group">
+                <button class="btn btn-alta" onclick="gestionarSuscripcion('activar')">
+                    🚀 Activar Suscripción
+                </button>
+                <button class="btn btn-baja" onclick="gestionarSuscripcion('cancelar')">
+                    🛑 Cancelar Suscripción
+                </button>
+            </div>
+        </div>
+
+        <!-- Terminal de Estado / Servidor -->
+        <div class="card console-card">
+            <h3>Respuesta del Servidor (BD)</h3>
+            <div id="consola" class="console-box">Esperando acciones de usuario...</div>
+        </div>
+    </main>
+</div>
+
+<script>
+    const log = (msg) => {
+        const consola = document.getElementById('consola');
+        consola.innerText = typeof msg === 'string' ? msg : JSON.stringify(msg, null, 2);
+    };
+
+    async function gestionarSuscripcion(accion) {
+        const id = document.getElementById('suscripcionId').value;
+        if (!id) {
+            alert("Por favor, ingresa un ID de suscripción válido.");
+            return;
+        }
+
+        log(`Enviando solicitud para ${accion} la suscripción #${id}...`);
+
+        try {
+            const respuesta = await fetch(`/api/suscripcion/${accion}/${id}`, {
+                method: 'POST'
+            });
+            
+            const textoResp = await respuesta.text();
+            try {
+                // Intenta parsear si el backend responde con JSON
+                log(JSON.parse(textoResp));
+            } catch {
+                // Si el backend responde con texto plano (ej: "Suscripción cancelada con éxito")
+                log({ respuestaServidor: textoResp, status: respuesta.status });
+            }
+        } catch (error) {
+            log({ error: `Error de red al intentar ${accion} la suscripción.` });
+        }
+    }
+</script>
+
+</body>
+</html>
