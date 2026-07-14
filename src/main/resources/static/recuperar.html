@@ -4,10 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComicUAM - Iniciar Sesión</title>
+    <title>ComicUAM - Recuperar Contraseña</title>
 
     <link rel="stylesheet" href="../static/css/p1.css">
     
+    <style>
+        
+        .netflix-navbar {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 15px 4% !important; 
+            background: rgba(0, 0, 0, 0.9) !important; 
+        }
+
+        .nav-links ul {
+            display: flex !important;
+            align-items: center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+            gap: 20px !important; 
+        }
+
+        .nav-links a {
+            font-size: 1.05rem !important;
+            font-weight: 500 !important;
+            color: #e5e5e5 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease, transform 0.2s ease !important;
+            display: inline-block !important;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff !important;
+            transform: scale(1.05);
+        }
+
+        /* Botón Iniciar Sesión en Naranja */
+        .nav-links ul li:last-child a {
+            background-color: #ff6600 !important; 
+            color: white !important;
+            padding: 7px 17px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3) !important; 
+            transition: background 0.2s ease, transform 0.2s ease !important;
+        }
+
+        .nav-links ul li:last-child a:hover {
+            background-color: #cc5200 !important; 
+            transform: translateY(-1px) !important;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.85) !important;
+            padding: 40px !important;
+            border-radius: 8px !important;
+            max-width: 450px !important;
+            margin: 80px auto !important; /* Centra el recuadro perfectamente en la pantalla */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+            border: 1px solid rgba(255, 102, 0, 0.15) !important; /* Borde naranja muy sutil */
+        }
+
+        .login-container h1 {
+            color: #ffffff !important;
+            font-size: 2.1rem !important;
+            margin-bottom: 12px !important;
+            font-weight: 700 !important;
+            text-align: left !important;
+        }
+
+        .login-container p {
+            color: #a3a3a3 !important;
+            font-size: 0.95rem !important;
+            margin-bottom: 25px !important;
+            line-height: 1.4 !important;
+        }
+
+
+        .input-group label {
+            color: #e5e5e5 !important;
+            font-size: 0.9rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 8px !important;
+            display: block !important;
+        }
+
+        /* Inputs del formulario */
+        .input-group input {
+            background: #333333 !important;
+            border: 1px solid transparent !important;
+            color: white !important;
+            border-radius: 4px !important;
+            padding: 12px !important;
+            font-size: 1rem !important;
+            transition: border-color 0.3s ease !important;
+        }
+
+        /* Foco del input (se ilumina en naranja al escribir) */
+        .input-group input:focus {
+            outline: none !important;
+            border-color: #ff6600 !important;
+        }
+
+    
+        .btn-login {
+            background-color: #ff6600 !important;
+            color: white !important;
+            width: 100% !important;
+            padding: 14px !important;
+            font-size: 1.05rem !important;
+            font-weight: 600 !important;
+            border: none !important;
+            border-radius: 4px !important;
+            cursor: pointer !important;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3) !important;
+            transition: background 0.2s ease, transform 0.2s ease !important;
+            margin-top: 15px !important;
+        }
+
+        .btn-login:hover {
+            background-color: #cc5200 !important;
+            transform: translateY(-1px) !important;
+        }
+
+        .register-link {
+            margin-top: 25px !important;
+            color: #a3a3a3 !important;
+            text-align: center !important;
+            font-size: 0.95rem !important;
+        }
+
+        .register-link a {
+            color: #ff6600 !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: color 0.2s ease !important;
+            margin-left: 5px !important;
+        }
+
+        .register-link a:hover {
+            color: #cc5200 !important;
+            text-decoration: underline !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -31,60 +172,54 @@
 
         <section class="login-container">
 
-            <h1>Recuperar Conrtaseña</h1>
+            <!-- Título corregido y destacado -->
+            <h1>Recuperar Contraseña</h1>
 
-            <p>Ingresa los datos para recuperar ocntraseña ComicUAM.</p>
+            <!-- Descripción corregida -->
+            <p>Ingresa tus datos para recuperar la contraseña en ComicUAM.</p>
 
             <form action="#" method="post">
 
                 <div class="input-group">
-
                     <label for="correo">Correo electrónico</label>
-
                     <input
                         type="email"
                         id="correo"
                         name="correo"
                         placeholder="Ingresa tu correo"
                         required>
-
                 </div>
 
-
                 <div class="input-group">
-
-                    <label for="numero_telefonico">Número Telefonico</label>
-
+                    <label for="numero_tel">Número Telefónico</label>
                     <input
-                        type="numero"
+                        type="tel"
                         id="numero_tel"
                         name="numero_tel"
-                        placeholder="Ingresa tu número telefonico"
+                        placeholder="Ingresa tu número telefónico"
                         required>
                 </div>
 
                 <div class="input-group">
-
-                    <label for="Ultima_Contraseña">Ultima Contraseña</label>
-
+                    <label for="ultim_pass">Última Contraseña</label>
                     <input
                         type="password"
                         id="ultim_pass"
                         name="ultim_pass"
-                        placeholder="Ingresa la ultima password que recuerdes"
+                        placeholder="Ingresa la última que recuerdes"
                         required>
                 </div>
 
-
-
+                <!-- Botón de Envío Naranja Estilizado -->
                 <button class="btn-login" type="submit">
-                    Enviar Codigo de Recuperación
+                    Enviar Código de Recuperación
                 </button>
 
             </form>
 
+            <!-- Enlace Cancelar estilizado -->
             <div class="register-link">
-                ¿Cancelar la Recuperación?
+                ¿Cancelar la recuperación? 
                 <a href="../login/login.html">Cancelar</a>
             </div>
 

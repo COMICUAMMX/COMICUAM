@@ -6,6 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ComicUam</title>
     <link rel="stylesheet" href="../static/css/p1.css">
+    
+    <style>
+        /* ========================================================
+           ✨ AJUSTES DE MENÚ EN COLOR NARANJA 🍊
+           ======================================================== */
+        
+        /* Asegura que toda la barra use Flexbox y centre todo verticalmente */
+        .netflix-navbar {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 15px 4% !important; 
+            background: rgba(0, 0, 0, 0.9) !important; 
+        }
+
+        /* Baja la lista del menú y la alinea correctamente */
+        .nav-links ul {
+            display: flex !important;
+            align-items: center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+            gap: 20px !important; 
+        }
+
+        /* Estilo base para los enlaces normales */
+        .nav-links a {
+            font-size: 1.05rem !important;
+            font-weight: 500 !important;
+            color: #e5e5e5 !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease, transform 0.2s ease !important;
+            display: inline-block !important;
+        }
+
+        /* Efecto al pasar el mouse por encima */
+        .nav-links a:hover {
+            color: #ffffff !important;
+            transform: scale(1.05);
+        }
+
+        /* 🍊 Resaltado en NARANJA para la pestaña activa en la que estás parado */
+        .nav-links a.active {
+            color: #ff6600 !important; 
+            font-weight: 700 !important;
+        }
+
+        /* 🍊 BOTÓN INICIAR SESIÓN EN COLOR NARANJA LLAMATIVO */
+        .nav-links ul li:last-child a {
+            background-color: #ff6600 !important; /* Naranja ComicUAM */
+            color: white !important;
+            padding: 7px 17px !important;
+            border-radius: 4px !important;
+            font-weight: 600 !important;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3) !important; /* Sombra naranja */
+            transition: background 0.2s ease, transform 0.2s ease !important;
+        }
+
+        /* Efecto hover exclusivo para Iniciar Sesión (Naranja un poco más oscuro) */
+        .nav-links ul li:last-child a:hover {
+            background-color: #cc5200 !important; 
+            transform: translateY(-1px) !important;
+        }
+
+        /* ========================================================
+           EFECTOS ANTERIORES (CONSERVADOS)
+           ======================================================== */
+        .hero-banner {
+            transition: all 0.5s ease-in-out;
+            max-height: 1000px;
+            opacity: 1;
+            overflow: hidden;
+        }
+
+        .hero-hidden {
+            max-height: 0;
+            opacity: 0;
+            padding: 0 !important;
+            margin: 0 !important;
+            pointer-events: none;
+        }
+
+        .comic-row {
+            transition: all 0.6s ease-in-out;
+            opacity: 1;
+            max-height: 1000px;
+            overflow: hidden;
+        }
+
+        .row-hidden {
+            opacity: 0;
+            max-height: 0;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,10 +114,10 @@
         </div>
         <nav class="nav-links">
             <ul>
-                <li><a href="#" class="active">Inicio</a></li>
-                <li><a href="#">Cómics</a></li>
-                <li><a href="#">Novedades</a></li>
-                <li><a href="#">Mi Lista</a></li>
+                <li><a href="#" id="btn-inicio" class="active" onclick="mostrarSeccion('todos')">Inicio</a></li>
+                <li><a href="#" id="btn-comics" onclick="mostrarSeccion('destacados')">Cómics</a></li>
+                <li><a href="#" id="btn-novedades" onclick="mostrarSeccion('novedades')">Novedades</a></li>
+                <li><a href="#" id="btn-milista" onclick="mostrarSeccion('milista')">Mi Lista</a></li>
                 <li><a href="../static/login.html">Iniciar sesión</a></li>
             </ul>
         </nav>
@@ -26,7 +125,7 @@
 
     <main class="main-container">
         
-        <section class="hero-banner">
+        <section class="hero-banner" id="main-hero">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">COMICUAM</h1>
@@ -40,7 +139,7 @@
             </div>
         </section>
 
-        <section class="comic-row">
+        <section class="comic-row" id="sec-destacados">
             <h2>Cómics Destacados</h2>
             <div class="comic-slider">
                 <div class="comic-card">
@@ -67,7 +166,7 @@
                 <div class="comic-card">
                     <img src="../static/assets/comics/mi_Comicdescargado/Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-0001.jpg" alt="Comic 4">
                     <div class="card-hover-info">
-                        <h4>Nigtwing</h4>
+                        <h4>Nightwing</h4>
                         <button class="btn-card-read">Leer</button>
                     </div>
                 </div>
@@ -81,13 +180,86 @@
             </div>
         </section>
 
-        <section class="comic-row">
-            <h2>Tendencias de la Semana</h2>
+        <section class="comic-row row-hidden" id="sec-novedades">
+            <h2>🔥 Grandes Novedades</h2>
             <div class="comic-slider">
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/The-Spectacular-Spider-Men-007-00000a.jpg" alt="Novedad 1">
+                    <div class="card-hover-info">
+                        <h4>Nuevo Spiderman</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
                 </div>
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/Batman-163-(2026)-(Digital)-(Pyrate-DCP)-0001 (1).jpg" alt="Novedad 2">
+                    <div class="card-hover-info">
+                        <h4>Batman Especial</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="comic-row row-hidden" id="sec-milista">
+            <h2>⭐ Mi Lista de Favoritos</h2>
+            <div class="comic-slider">
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Favorito 1">
+                    <div class="card-hover-info">
+                        <h4>Hulk Guardado</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
+                </div>
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-0001.jpg" alt="Favorito 2">
+                    <div class="card-hover-info">
+                        <h4>Nightwing Guardado</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
 
+    <script>
+        function mostrarSeccion(seccion) {
+            const hero = document.getElementById('main-hero');
+            const destacados = document.getElementById('sec-destacados');
+            const novedades = document.getElementById('sec-novedades');
+            const milista = document.getElementById('sec-milista');
+
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+
+            if (seccion === 'todos') {
+                hero.classList.remove('hero-hidden');
+                destacados.classList.remove('row-hidden');
+                novedades.classList.add('row-hidden');
+                milista.classList.add('row-hidden');
+                document.getElementById('btn-inicio').classList.add('active');
+            } 
+            else if (seccion === 'destacados') {
+                hero.classList.add('hero-hidden');
+                destacados.classList.remove('row-hidden');
+                novedades.classList.add('row-hidden');
+                milista.classList.add('row-hidden');
+                document.getElementById('btn-comics').classList.add('active');
+            }
+            else if (seccion === 'novedades') {
+                hero.classList.add('hero-hidden');
+                destacados.classList.add('row-hidden');
+                milista.classList.add('row-hidden');
+                novedades.classList.remove('row-hidden');
+                document.getElementById('btn-novedades').classList.add('active');
+            } 
+            else if (seccion === 'milista') {
+                hero.classList.add('hero-hidden');
+                destacados.classList.add('row-hidden');
+                novedades.classList.add('row-hidden');
+                milista.classList.remove('row-hidden');
+                document.getElementById('btn-milista').classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>
