@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>ComicUam - Inicio</title>
     <!-- Ruta absoluta corregida para Spring Boot -->
     <link rel="stylesheet" href="/css/p1.css">
@@ -25,15 +26,45 @@
             </ul>
         </div>
     </header>
+=======
+    <title>ComicUam</title>
+    <link rel="stylesheet" href="../static/css/p1.css">
+    
+   
+</head>
+<body>
+
+   <header class="netflix-navbar">
+    <div class="logo">
+        <img src="../static/img/logo.jpeg" alt="Logo de ComicUam">
+    </div>
+    <nav class="nav-links">
+        <ul>
+            <li><a href="../static/index.html">Inicio</a></li>
+            
+            <!-- Vinculamos cada botón al ID de su sección correspondiente -->
+            <li><a href="#sec-destacados">Cómics</a></li>
+            <li><a href="#sec-novedades">Novedades</a></li>
+            <li><a href="#sec-milista">Mi Lista</a></li>
+            
+            <li><a href="../static/login.html">Iniciar sesión</a></li>
+        </ul>
+    </nav>
+</header>
+>>>>>>> main
 
     <main class="main-container">
         
-        <section class="hero-banner">
+        <section class="hero-banner" id="main-hero">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <h1 class="hero-title">COMICUAM</h1>
                 <p class="hero-description">
+<<<<<<< HEAD
                     Los estudiantes de DSAGE requieren hacer proyectos para salvar el trimestre leyendo Garfield.
+=======
+                    los estudiantes de DSAGE de la uam requieren hacer proyectos para salvar el trimestre, batman sera la salvaciòn.
+>>>>>>> main
                 </p>
                 <div class="hero-buttons">
                     <!-- Rutas de assets corregidas apuntando desde la raíz pública -->
@@ -43,19 +74,94 @@
             </div>
         </section>
 
-        <section class="comic-row">
+        <section class="comic-row" id="sec-destacados">
             <h2>Cómics Destacados</h2>
+            
+          <div class="comic-slider">
+    
+    <!-- 1. Batman #163 -->
+    <div class="comic-card">
+        <!-- La imagen del index se queda en mi_Comicdescargado, pero el onclick apunta a /batman -->
+        <img src="../static/assets/comics/mi_Comicdescargado/Batman-163-(2026)-(Digital)-(Pyrate-DCP)-1.jpg" 
+             alt="Comic 1" 
+             style="cursor: pointer;"
+             onclick="verComicImagenes('../static/assets/comics/batman', 24, 'El caballero de la noche se enfrenta a un nuevo misterio en las calles de Gotham que pondrá a prueba sus habilidades de detective.', 'Batman-163-(2026)-(Digital)-(Pyrate-DCP)-')">
+        <div class="card-hover-info">
+            <h4>Batman #163</h4>
+            <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/batman', 24, 'El caballero de la noche se enfrenta a un nuevo misterio en las calles de Gotham que pondrá a prueba sus habilidades de detective.', 'Batman-163-(2026)-(Digital)-(Pyrate-DCP)-')">Leer</button>
+        </div>
+    </div>
+
+    <!-- 2. Infernal Hulk #007 -->
+    <div class="comic-card">
+        <!-- El onclick apunta a la carpeta /hulk donde están tus páginas -->
+        <img src="../static/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" 
+             alt="Comic 2" 
+             style="cursor: pointer;"
+             onclick="verComicImagenes('../static/assets/comics/hulk', 24, 'Bruce Banner enfrenta una de sus etapas más oscuras en esta entrega. La radiación gamma se sale de control mientras viejos enemigos acechan en las sombras.', 'Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-')">
+        <div class="card-hover-info">
+            <h4>Infernal Hulk #007</h4>
+            <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/hulk', 24, 'Bruce Banner enfrenta una de sus etapas más oscuras en esta entrega. La radiación gamma se sale de control mientras viejos enemigos acechan en las sombras.', 'Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-')">Leer</button>
+        </div>
+    </div>
+
+    <!-- 3. Spiderman -->
+    <div class="comic-card">
+        <img src="../static/assets/comics/mi_Comicdescargado/The-Spectacular-Spider-Men-007-00000a.jpg" 
+             alt="Comic 3" 
+             style="cursor: pointer;"
+             onclick="verComicImagenes('../static/assets/comics/spiderman', 24, 'Peter y Miles se unen en una espectacular aventura por los tejados de Nueva York, enfrentando una threat que pondrá a prueba su sincronía.', 'The-Spectacular-Spider-Men-007-')">
+        <div class="card-hover-info">
+            <h4>Spiderman</h4>
+            <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/spiderman', 24, 'Peter y Miles se unen en una espectacular aventura por los tejados de Nueva York, enfrentando una threat que pondrá a prueba su sincronía.', 'The-Spectacular-Spider-Men-007-')">Leer</button>
+        </div>
+    </div>
+
+    <!-- 4. Nightwing -->
+    <div class="comic-card">
+        <img src="../static/assets/comics/mi_Comicdescargado/Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-0001.jpg" 
+             alt="Comic 4" 
+             style="cursor: pointer;"
+             onclick="verComicImagenes('../static/assets/comics/nightwing', 24, 'Dick Grayson lucha por mantener el orden en Blüdhaven mientras un nuevo sindicato intenta apoderarse de los muelles.', 'Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-')">
+        <div class="card-hover-info">
+            <h4>Nightwing</h4>
+            <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/nightwing', 24, 'Dick Grayson lucha por mantener el orden en Blüdhaven mientras un nuevo sindicato intenta apoderarse de los muelles.', 'Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-')">Leer</button>
+        </div>
+    </div>
+
+    <!-- 5. Capitan America -->
+    <div class="comic-card">
+        <img src="../static/assets/comics/mi_Comicdescargado/Captain-America-010-(2026)-(Digital)-(Shan-Empire)-00001.jpg" 
+             alt="Comic 5" 
+             style="cursor: pointer;"
+             onclick="verComicImagenes('../static/assets/comics/captainamerica', 24, 'Steve Rogers porta el escudo en una misión global de alto espionaje político, cuestionando las órdenes recibidas.', 'Captain-America-010-(2026)-(Digital)-(Shan-Empire)-')">
+        <div class="card-hover-info">
+            <h4>Capitan america</h4>
+            <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/captainamerica', 24, 'Steve Rogers porta el escudo en una misión global de alto espionaje político, cuestionando las órdenes recibidas.', 'Captain-America-010-(2026)-(Digital)-(Shan-Empire)-')">Leer</button>
+        </div>
+    </div>
+
+</div>
+        </section>
+
+        <section class="comic-row row-hidden" id="sec-novedades">
+            <h2>🔥 Grandes Novedades</h2>
             <div class="comic-slider">
                 
                 <div class="comic-card">
+<<<<<<< HEAD
                     <img src="/assets/comics/mi_Comicdescargado/Batman-163-(2026)-(Digital)-(Pyrate-DCP)-0001 (1).jpg" alt="Comic 1">
+=======
+                    <img src="../static/assets/comics/mi_Comicdescargado/The-Spectacular-Spider-Men-007-00000a.jpg" alt="Novedad 1">
+>>>>>>> main
                     <div class="card-hover-info">
-                        <h4>Batman #163</h4>
+                        <h4>Nuevo Spiderman</h4>
                         <button class="btn-card-read">Leer</button>
                     </div>
                 </div>
                 
                 <div class="comic-card">
+<<<<<<< HEAD
                     <img src="/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Comic 2">
                     <div class="card-hover-info">
                         <h4>Infernal Hulk #007</h4>
@@ -83,6 +189,11 @@
                     <img src="/assets/comics/mi_Comicdescargado/Captain-America-010-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Comic 5">
                     <div class="card-hover-info">
                         <h4>Capitán América</h4>
+=======
+                    <img src="../static/assets/comics/mi_Comicdescargado/Batman-163-(2026)-(Digital)-(Pyrate-DCP)-0001 (1).jpg" alt="Novedad 2">
+                    <div class="card-hover-info">
+                        <h4>Batman Especial</h4>
+>>>>>>> main
                         <button class="btn-card-read">Leer</button>
                     </div>
                 </div>
@@ -90,14 +201,47 @@
             </div>
         </section>
 
-        <section class="comic-row">
-            <h2>Tendencias de la Semana</h2>
+        <section class="comic-row row-hidden" id="sec-milista">
+            <h2>⭐ Mi Lista de Favoritos</h2>
             <div class="comic-slider">
+<<<<<<< HEAD
                 <!-- Espacio para más contenido dinámico -->
+=======
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Favorito 1">
+                    <div class="card-hover-info">
+                        <h4>Hulk Guardado</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
+                </div>
+                <div class="comic-card">
+                    <img src="../static/assets/comics/mi_Comicdescargado/Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-0001.jpg" alt="Favorito 2">
+                    <div class="card-hover-info">
+                        <h4>Nightwing Guardado</h4>
+                        <button class="btn-card-read">Leer</button>
+                    </div>
+                </div>
+>>>>>>> main
             </div>
         </section>
 
     </main>
 
+   <script>
+function verComicImagenes(rutaCarpeta, totalPaginas, descripcion, prefijoArchivo) {
+    // 1. Guardamos los datos para que el lector los pueda usar
+    localStorage.setItem('comicRutaCarpeta', rutaCarpeta);
+    localStorage.setItem('comicTotalPaginas', totalPaginas);
+    localStorage.setItem('comicDescripcion', descripcion);
+    localStorage.setItem('comicPrefijo', prefijoArchivo); 
+    
+    // 2. Extraemos un título limpio a partir del prefijo (ej: "Infernal Hulk")
+    const tituloLimpio = prefijoArchivo.split('-').slice(0, 2).join(' ');
+    localStorage.setItem('comicTitulo', tituloLimpio);
+    
+    // 3. Abrimos el lector en una pestaña nueva
+    window.open('../static/lector_imagenes.html', '_blank');
+}
+</script>
 </body>
 </html>

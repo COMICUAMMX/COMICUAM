@@ -1,34 +1,39 @@
-/* ==========================================
-   RESET & ESTILOS BASE
-   ========================================== */
-* {
+
+*
+
+
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: #141414; /* El negro clásico de Netflix */
+    
+    background: linear-gradient(to bottom, #4d1f00 0%, #141414 45%, #141414 100%) !important;
     color: #fff;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     overflow-x: hidden;
+    min-height: 100vh;
 }
-
-/* ==========================================
-   NAVBAR (HEADER)
-   ========================================== */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+   
+    padding-top: 0px !important; 
+}
 .netflix-navbar {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 68px;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Separa los enlaces del perfil */
-    padding: 0 4%;
     z-index: 1000;
     transition: background-color 0.5s;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 15px 4% !important; 
+    background: rgba(0, 0, 0, 0.9) !important; 
 }
 
 /* Clase que se añade con JavaScript al hacer scroll */
@@ -53,16 +58,49 @@ body {
     gap: 20px;
 }
 
-.nav-links a {
-    color: #e5e5e5;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: color 0.3s;
+/* Baja la lista del menú y la alinea correctamente */
+.nav-links ul {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+    gap: 20px !important; 
 }
 
-.nav-links a:hover, 
-.nav-links .active {
-    color: #fff;
+.nav-links a {
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
+    color: #e5e5e5 !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease, transform 0.2s ease !important;
+    display: inline-block !important;
+}
+
+.nav-links a:hover {
+    color: #ffffff !important;
+    transform: scale(1.05);
+}
+
+.nav-links a.active {
+    color: #ff6600 !important; 
+    font-weight: 700 !important;
+}
+
+/* Estilo especial para el último botón (Iniciar sesión) */
+.nav-links ul li:last-child a {
+    background-color: #ff6600 !important; 
+    color: white !important;
+    padding: 7px 17px !important;
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3) !important; 
+    transition: background 0.2s ease, transform 0.2s ease !important;
+}
+
+.nav-links ul li:last-child a:hover {
+    background-color: #cc5200 !important; 
+    transform: translateY(-1px) !important;
 }
 
 .navbar-right {
@@ -78,18 +116,36 @@ body {
     cursor: pointer;
 }
 
-/* ==========================================
-   HERO / BANNER PRINCIPAL
-   ========================================== */
+
 .hero-banner {
     position: relative;
     width: 100%;
-    height: 75vh;             /* Altura fija para que no floten las cosas a los lados */
+    height: 75vh;
     display: flex;
     align-items: center;
     padding-left: 4%;
-    margin-bottom: 40px;      /* Espacio obligatorio para empujar las tarjetas abajo */
-    background-color: #000;
+    margin-bottom: 40px;
+    transition: all 0.5s ease-in-out;
+    max-height: 1000px;
+    opacity: 1;
+    overflow: hidden;
+    padding-top: 80px !important; 
+
+    /* === NUEVAS PROPIEDADES DE FONDO === */
+    /* Ponemos un degradado de negro a transparente para proteger el texto, seguido de la ruta de tu imagen */
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.1) 70%), 
+                      url('../assets/comics/mi_Comicdescargado/Batman-Spawn-\(2022\)-001-001.jpg'); 
+    background-size: cover;       /* Hace que la imagen cubra todo el espacio sin deformarse */
+    background-position: center;  /* Centra la imagen del fondo */
+    background-repeat: no-repeat;
+}
+
+.hero-hidden {
+    max-height: 0;
+    opacity: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    pointer-events: none;
 }
 
 .hero-background {
@@ -120,6 +176,8 @@ body {
     max-width: 600px;
     margin-top: 80px;
 }
+
+
 .comic-row {
     width: 100%;
     padding: 0 4%;
@@ -127,7 +185,22 @@ body {
     position: relative;
     z-index: 5; /* Asegura que se dibuje por encima de cualquier fondo residual */
     clear: both; /* Rompe cualquier flotado extraño anterior */
+    transition: all 0.6s ease-in-out;
+    opacity: 1;
+    max-height: 1000px;
+    overflow: hidden;
 }
+
+.row-hidden {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    pointer-events: none;
+}
+
 .comic-card {
     flex-shrink: 0;
     width: 200px;             /* Ancho fijo para que no se desborden */
@@ -138,6 +211,7 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease;
 }
+
 .comic-card img {
     width: 100%;
     height: 100%;
@@ -145,10 +219,12 @@ body {
     border-radius: 4px;
     display: block;
 }
+
 .comic-card:hover {
     transform: scale(1.08);
     z-index: 10;
 }
+
 .comic-slider {
     display: flex;
     overflow-x: auto;
@@ -157,9 +233,11 @@ body {
     padding: 15px 0;
     align-items: flex-start;  /* Evita que se estire verticalmente dejando huecos */
 }
+
 .comic-slider::-webkit-scrollbar {
     display: none;
 }
+
 .comic-row h2 {
     font-size: 1.5rem;
     color: #e5e5e5;
@@ -214,77 +292,27 @@ body {
 }
 
 /* ==========================================
-   FILAS DE PELÍCULAS (ROWS)
+   LOGIN & REGISTRO
    ========================================== */
-.movie-row {
-    padding: 0 4%;
-    margin-bottom: 40px;
-}
-
-.row-title {
-    font-size: 1.4rem;
-    color: #e5e5e5;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.row-posters {
-    display: flex;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    padding: 20px 0;
-    gap: 10px;
-}
-
-/* Ocultar barra de scroll en navegadores */
-.row-posters::-webkit-scrollbar {
-    display: none;
-}
-.row-posters {
-    -ms-overflow-style: none;  /* IE y Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-.poster-item {
-    flex-shrink: 0;
-    width: 200px;
-    transition: transform 0.4s ease;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-.poster-item:hover {
-    transform: scale(1.08);
-    z-index: 10;
-}
-
-/* Variante para posters más grandes en la fila "Originales de Netflix" */
-.poster-large {
-    width: 240px;
-}
-
-
-/* ==========================================
-   LOGIN
-   ========================================== */
-
-.main-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #141414;
-    /* Dejamos un margen arriba para que la navbar fija de 68px no tape el contenido */
-    padding-top: 0; 
-}
-
-.login-container{
+.login-container {
     width: 420px;
     background: rgba(0,0,0,0.80);
     padding: 45px;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0,0,0,.6);
+    /* Asegura que no se pegue arriba si hay variaciones de pantalla */
+    margin: 0 auto !important; 
 }
-
+.login-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    /* Empuja el formulario hacia abajo para librar la navbar fija */
+    padding-top: 100px !important; 
+    padding-bottom: 40px !important;
+}
 .login-container h1{
     font-size: 2rem;
     margin-bottom: 10px;
@@ -360,3 +388,119 @@ body {
 .register-link a:hover{
     text-decoration: underline;
 }
+
+/* ==========================================
+   VISOR DE CÓMICS (lector_imagenes.html)
+   ========================================== */
+.reader-container {
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px; /* Ampliamos un poco el margen del contenido */
+    margin: 0 auto;
+    padding: 140px 20px 60px 20px; /* Más espacio libre debajo de la navbar y al final */
+    box-sizing: border-box;
+}
+
+.reader-container h1 {
+    font-size: 2.5rem;
+    color: #e50914;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.descripcion-box {
+    background-color: rgba(0, 0, 0, 0.85); 
+    padding: 25px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    text-align: left;
+    border-left: 5px solid #e50914; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.descripcion-box h3 {
+    margin: 0 0 10px 0;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.descripcion-box p {
+    margin: 0;
+    color: #e5e5e5;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+.image-viewer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #0d0d0d; /* Fondo un poco más oscuro que el body para centrar la vista */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); /* Sombra elegante que separa el cómic del fondo */
+    margin-top: 25px;
+}
+
+#pagina-actual-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+.controls {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+.btn-nav {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-nav:hover {
+    background-color: #f4a906; 
+}
+
+.btn-nav:active {
+    transform: scale(0.96);
+}
+
+.btn-nav:disabled {
+    background-color: #333;
+    color: #777;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#info-pagina {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e5e5e5;
+    min-width: 150px;
+    text-align: center;
+}
+
+/*pagina actual y total de paginas*/

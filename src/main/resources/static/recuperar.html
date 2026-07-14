@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ComicUAM - Iniciar Sesión</title>
+    <title>ComicUAM - Recuperar Contraseña</title>
 
     <link rel="stylesheet" href="../static/css/p1.css">
+    <link rel="stylesheet" href="../static/css/login.css">
     
 </head>
 
@@ -28,68 +29,64 @@
     </header>
 
     <main class="main-container">
+        <div class="login-page-wrapper">
 
         <section class="login-container">
 
-            <h1>Recuperar Conrtaseña</h1>
+            <!-- Título corregido y destacado -->
+            <h1>Recuperar Contraseña</h1>
 
-            <p>Ingresa los datos para recuperar ocntraseña ComicUAM.</p>
+            <!-- Descripción corregida -->
+            <p>Ingresa tus datos para recuperar la contraseña en ComicUAM.</p>
 
             <form action="#" method="post">
 
                 <div class="input-group">
-
                     <label for="correo">Correo electrónico</label>
-
                     <input
                         type="email"
                         id="correo"
                         name="correo"
                         placeholder="Ingresa tu correo"
                         required>
-
                 </div>
 
-
                 <div class="input-group">
-
-                    <label for="numero_telefonico">Número Telefonico</label>
-
+                    <label for="numero_tel">Número Telefónico</label>
                     <input
-                        type="numero"
+                        type="tel"
                         id="numero_tel"
                         name="numero_tel"
-                        placeholder="Ingresa tu número telefonico"
+                        placeholder="Ingresa tu número telefónico"
                         required>
                 </div>
 
                 <div class="input-group">
-
-                    <label for="Ultima_Contraseña">Ultima Contraseña</label>
-
+                    <label for="ultim_pass">Última Contraseña</label>
                     <input
                         type="password"
                         id="ultim_pass"
                         name="ultim_pass"
-                        placeholder="Ingresa la ultima password que recuerdes"
+                        placeholder="Ingresa la última que recuerdes"
                         required>
                 </div>
 
-
-
+                <!-- Botón de Envío Naranja Estilizado -->
                 <button class="btn-login" type="submit">
-                    Enviar Codigo de Recuperación
+                    Enviar Código de Recuperación
                 </button>
 
             </form>
 
+            <!-- Enlace Cancelar estilizado -->
             <div class="register-link">
-                ¿Cancelar la Recuperación?
+                ¿Cancelar la recuperación? 
                 <a href="../login/login.html">Cancelar</a>
             </div>
 
         </section>
 
+        </div>
     </main>
 
 </body>
