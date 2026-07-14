@@ -3,76 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visor de Cómics - ComicUam</title>
-    
+    <title>Visualizador de Cómics - ComicUAM</title>
+    <!-- Enlazamos a tu p1.css que ya tiene integrados los estilos del lector -->
     <link rel="stylesheet" href="../static/css/p1.css">
 </head>
 <body>
 
-    <div class="reader-container">
-        <h1 id="titulo-comic">Leyendo Cómic</h1>
+    <!-- Barra de navegación superior fija -->
+    <header class="netflix-navbar">
+        <div class="logo">
+            <img src="img/logo.jpeg" alt="Logo de ComicUam">
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="#">Cómics</a></li>
+                <li><a href="#">Novedades</a></li>
+                <li><a href="#">Mi Lista</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenedor exclusivo del lector (Protegido en p1.css) -->
+    <main class="reader-container">
         
+        <!-- Título del Cómic -->
+        <h1 id="titulo-comic">Cargando Cómic...</h1>
+
+        <!-- Caja de Sinopsis -->
         <div class="descripcion-box">
             <h3>Sinopsis</h3>
-            <p id="texto-descripcion">Cargando descripción...</p>
+            <p id="descripcion-comic">Cargando descripción del cómic...</p>
         </div>
 
+        <!-- Visor de la página actual -->
         <div class="image-viewer">
-            <!-- Imagen dinámica del cómic -->
-            <img id="pagina-actual-img" src="" alt="Página del cómic">
+            <img id="pagina-actual-img" src="" alt="Cargando página...">
             
+            <!-- Controles de navegación (Anterior, Contador, Siguiente) -->
             <div class="controls">
                 <button id="btn-anterior" class="btn-nav" onclick="cambiarPagina(-1)">Anterior</button>
-                <span id="info-pagina">Página 1 de X</span>
+                <span id="info-pagina">Página 1 de 1</span>
                 <button id="btn-siguiente" class="btn-nav" onclick="cambiarPagina(1)">Siguiente</button>
             </div>
         </div>
-    </div>
 
+    </main>
+
+    <!-- Lógica del Lector de Imágenes -->
     <script>
-        const rutaCarpeta = localStorage.getItem('../comics/mi_Comicdescargado/hulk/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00003.jpg');
-        const totalPaginas = parseInt(localStorage.getItem('comicTotalPaginas'));
-        const descripcionComic = localStorage.getItem('comicDescripcion');
-        const tituloComic = localStorage.getItem('comicTitulo');
+        // Variables globales que se recuperan del LocalStorage
+        const rutaCarpeta = localStorage.getItem('comicRutaCarpeta');
+        const totalPaginas = parseInt(localStorage.getItem('comicTotalPaginas')) || 1;
+        const descripcion = localStorage.getItem('comicDescripcion');
         const prefijo = localStorage.getItem('comicPrefijo');
-        
+        const titulo = localStorage.getItem('comicTitulo');
+
         let paginaActual = 1;
 
-        function formatearNumero(num) {
-            return num.toString().padStart(5, '0'); 
+        // Inicializar los datos del cómic en la pantalla
+        if (rutaCarpeta && prefijo) {
+            document.getElementById('titulo-comic').innerText = titulo;
+            document.getElementById('descripcion-comic').innerText = descripcion;
+            actualizarVisor();
+        } else {
+            document.getElementById('titulo-comic').innerText = "Error al cargar";
+            document.getElementById('descripcion-comic').innerText = "No se encontraron datos del cómic seleccionado.";
         }
 
-        function mostrarPagina() {
-            document.getElementById('texto-descripcion').textContent = descripcionComic;
-            document.getElementById('titulo-comic').textContent = tituloComic;
-
-            const nombreArchivo = `${prefijo}${formatearNumero(paginaActual)}.jpg`;
-            const rutaCompletaImagen = `${rutaCarpeta}/${nombreArchivo}`;
+        // Función que renderiza la página y bloquea/desbloquea botones
+        function actualizarVisor() {
+            // Formatea el número a 5 dígitos (ej: 1 -> 00001) para coincidir con tus archivos
+            const numeroFormateado = String(paginaActual).padStart(5, '0');
             
-            document.getElementById('pagina-actual-img').src = rutaCompletaImagen;
-            document.getElementById('info-pagina').textContent = `Página ${paginaActual} de ${totalPaginas}`;
+            // Construye la ruta de la imagen
+            const urlImagen = `${rutaCarpeta}/${prefijo}${numeroFormateado}.jpg`;
             
+            // Cambia la imagen en el HTML
+            document.getElementById('pagina-actual-img').src = urlImagen;
+            
+            // Actualiza el texto del contador (ej: "Página 1 de 24")
+            document.getElementById('info-pagina').innerText = `Página ${paginaActual} de ${totalPaginas}`;
+            
+            // Controla los estados de los botones para no salirse del límite
             document.getElementById('btn-anterior').disabled = (paginaActual === 1);
             document.getElementById('btn-siguiente').disabled = (paginaActual === totalPaginas);
         }
 
+        // Función para avanzar o retroceder
         function cambiarPagina(direccion) {
-            const nuevaPagina = paginaActual + direccion;
+            paginaActual += direccion;
+            actualizarVisor();
             
-            if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
-                paginaActual = nuevaPagina;
-                mostrarPagina();
-                window.scrollTo(0, 0);
-            }
-        }
-
-        if (rutaCarpeta && prefijo && totalPaginas > 0) {
-            mostrarPagina();
-        } else {
-            document.getElementById('texto-descripcion').textContent = "Error al intentar cargar la estructura del cómic.";
-            document.getElementById('pagina-actual-img').style.display = 'none';
-            document.getElementById('info-pagina').style.display = 'none';
         }
     </script>
+
 </body>
 </html>
