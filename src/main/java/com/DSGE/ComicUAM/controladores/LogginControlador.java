@@ -6,10 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class LogginControlador {
 
-    @GetMapping("/loggin")
-    public String loggin() {
-        System.out.println("Loggin");
-        return "loggin";
+    @GetMapping("/login")
+    public String login() {
+        return "forward:/login.html";
     }
-    
+
+    @GetMapping("/registro")
+    public String registro() {
+        // Cambiar aquí para que busque el nuevo archivo físico
+        return "forward:/registro.html"; 
+    }
 }

@@ -16,12 +16,12 @@ public class Usuario {
     private String email;
     private String password; 
     
-    @Column("es_suscriptor") // Mapea camelCase a snake_case de la BD
-    private boolean esSuscriptor;
+    @Column("es_suscriptor")
+    private boolean esSuscriptor = false; // Por defecto inicia falso (sin suscripción)
 
     @Column("id_rol")
-    private Integer idRol; // Añadido para la relación con la tabla roles
+    private Integer idRol = 1; // Por defecto toma el ID 1 ("sin suscripción")
 
     @Column("fecha_vencimiento_suscripcion")
-    private LocalDate fechaVencimientoSuscripcion; // Añadido según tu nueva imagen
+    private LocalDate fechaVencimientoSuscripcion; 
 }

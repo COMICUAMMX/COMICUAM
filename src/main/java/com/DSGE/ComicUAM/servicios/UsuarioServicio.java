@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioServicio {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -24,5 +25,13 @@ public class UsuarioServicio {
 
         // 3. Guardar en MySQL
         return usuarioRepository.save(nuevoUsuario);
+    }
+
+    /**
+     * Busca un usuario por su correo electrónico para el proceso de Login.
+     * Si no lo encuentra, retorna null.
+     */
+    public Usuario buscarPorEmail(String email) {
+        return usuarioRepository.findByEmail(email).orElse(null);
     }
 }
