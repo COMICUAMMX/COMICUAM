@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizador de Cómics - ComicUAM</title>
-    <!-- Enlazamos a tu p1.css que ya tiene integrados los estilos del lector -->
+    <!-- Enlazamos tus estilos -->
     <link rel="stylesheet" href="../static/css/p1.css">
+    <link rel="stylesheet" href="../static/css/lector.css">
 </head>
 <body>
 
@@ -17,86 +18,89 @@
         <nav class="nav-links">
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="#">Cómics</a></li>
-                <li><a href="#">Novedades</a></li>
-                <li><a href="#">Mi Lista</a></li>
+                <li><a href="index.html#sec-destacados">Cómics</a></li>
+                <li><a href="index.html#sec-novedades">Novedades</a></li>
+                <li><a href="index.html#sec-milista">Mi Lista</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Contenedor exclusivo del lector (Protegido en p1.css) -->
+    <!-- Contenedor exclusivo del lector -->
     <main class="reader-container">
         
-        <!-- Título del Cómic -->
+        <!-- Título del Cómic con ID limpio -->
         <h1 id="titulo-comic">Cargando Cómic...</h1>
 
-        <!-- Caja de Sinopsis -->
+        <!-- Caja de Sinopsis Estilizada -->
         <div class="descripcion-box">
             <h3>Sinopsis</h3>
-            <p id="descripcion-comic">Cargando descripción del cómic...</p>
+            <p id="comic-descripcion">Cargando descripción del cómic...</p>
         </div>
 
-        <!-- Visor de la página actual -->
-        <div class="image-viewer">
-            <img id="pagina-actual-img" src="" alt="Cargando página...">
+        <!-- Visor de la página actual (PROPORCIÓN REPARADA Y LISTO PARA 3D) -->
+        <div class="image-viewer" style="display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 20px;">
             
-            <!-- Controles de navegación (Anterior, Contador, Siguiente) -->
-            <div class="controls">
-                <button id="btn-anterior" class="btn-nav" onclick="cambiarPagina(-1)">Anterior</button>
-                <span id="info-pagina">Página 1 de 1</span>
-                <button id="btn-siguiente" class="btn-nav" onclick="cambiarPagina(1)">Siguiente</button>
+            <!-- Contenedor que hará el efecto de volteado -->
+            <div class="page-container" id="comic-book-page" style="width: 100%; max-width: 700px; margin: 0 auto; display: block;">
+                <img id="pagina-actual-img" src="" alt="Cargando página..." 
+                     style="max-width: 100%; max-height: 80vh; width: auto; height: auto; object-fit: contain; display: block; margin: 0 auto; border-radius: 6px; box-shadow: 0 15px 40px rgba(0,0,0,0.8);">
+            </div>
+            
+            <!-- Controles de navegación limpios -->
+            <div class="controls" style="margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 40px;">
+                <button id="btn-anterior" class="btn-nav" onclick="cambiarPagina(-1)">ANTERIOR</button>
+                <span id="info-pagina" style="color: #ffffff; font-weight: bold; font-size: 1.1rem; letter-spacing: 1px;">Página 1 de 24</span>
+                <button id="btn-siguiente" class="btn-nav" onclick="cambiarPagina(1)">SIGUIENTE</button>
             </div>
         </div>
 
     </main>
 
-    <!-- Lógica del Lector de Imágenes -->
+    <!-- Script de control de lógica y efectos -->
     <script>
-        // Variables globales que se recuperan del LocalStorage
-        const rutaCarpeta = localStorage.getItem('comicRutaCarpeta');
-        const totalPaginas = parseInt(localStorage.getItem('comicTotalPaginas')) || 1;
-        const descripcion = localStorage.getItem('comicDescripcion');
-        const prefijo = localStorage.getItem('comicPrefijo');
-        const titulo = localStorage.getItem('comicTitulo');
-
+        // Variables globales para el estado del lector
         let paginaActual = 1;
+        let totalPaginas = parseInt(localStorage.getItem('comicTotalPaginas')) || 24;
+        let rutaCarpeta = localStorage.getItem('comicRutaCarpeta') || '';
+        let prefijoArchivo = localStorage.getItem('comicPrefijo') || '';
 
-        // Inicializar los datos del cómic en la pantalla
-        if (rutaCarpeta && prefijo) {
-            document.getElementById('titulo-comic').innerText = titulo;
-            document.getElementById('descripcion-comic').innerText = descripcion;
+        // Al cargar la página, inyectamos los textos guardados en el localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('titulo-comic').innerText = localStorage.getItem('comicTitulo') || 'Cómic';
+            document.getElementById('comic-descripcion').innerText = localStorage.getItem('comicDescripcion') || 'Sin descripción disponible.';
             actualizarVisor();
-        } else {
-            document.getElementById('titulo-comic').innerText = "Error al cargar";
-            document.getElementById('descripcion-comic').innerText = "No se encontraron datos del cómic seleccionado.";
+        });
+
+        // Función para cambiar de página con efecto 3D
+        function cambiarPagina(direccion) {
+            if (paginaActual + direccion < 1 || paginaActual + direccion > totalPaginas) return;
+
+            const contenedorHoja = document.getElementById('comic-book-page');
+            contenedorHoja.classList.add('volteando');
+
+            setTimeout(() => {
+                paginaActual += direccion;
+                actualizarVisor(); 
+                contenedorHoja.classList.remove('volteando');
+            }, 250); 
         }
 
-        // Función que renderiza la página y bloquea/desbloquea botones
+        // Función para renderizar la imagen correspondiente y actualizar el contador
         function actualizarVisor() {
-            // Formatea el número a 5 dígitos (ej: 1 -> 00001) para coincidir con tus archivos
+            // Formateamos el número de página a 5 dígitos (ej: 00001, 00002...)
             const numeroFormateado = String(paginaActual).padStart(5, '0');
+            const imagenImg = document.getElementById('pagina-actual-img');
             
-            // Construye la ruta de la imagen
-            const urlImagen = `${rutaCarpeta}/${prefijo}${numeroFormateado}.jpg`;
+            // Construimos la ruta dinámica de la imagen
+            imagenImg.src = `${rutaCarpeta}/${prefijoArchivo}${numeroFormateado}.jpg`;
             
-            // Cambia la imagen en el HTML
-            document.getElementById('pagina-actual-img').src = urlImagen;
-            
-            // Actualiza el texto del contador (ej: "Página 1 de 24")
+            // Actualizamos el contador de páginas inferior
             document.getElementById('info-pagina').innerText = `Página ${paginaActual} de ${totalPaginas}`;
-            
-            // Controla los estados de los botones para no salirse del límite
+
+            // Controlamos los estados de los botones
             document.getElementById('btn-anterior').disabled = (paginaActual === 1);
             document.getElementById('btn-siguiente').disabled = (paginaActual === totalPaginas);
         }
-
-        // Función para avanzar o retroceder
-        function cambiarPagina(direccion) {
-            paginaActual += direccion;
-            actualizarVisor();
-            
-        }
     </script>
-
 </body>
 </html>
