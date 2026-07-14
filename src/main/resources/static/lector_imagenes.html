@@ -4,36 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizador de Cómics - ComicUAM</title>
-    <!-- Enlazamos tus estilos -->
-    <link rel="stylesheet" href="../static/css/p1.css">
-    <link rel="stylesheet" href="../static/css/lector.css">
+    
+    <!-- CORREGIDO: Rutas absolutas a los CSS (sin '../static') -->
+    <link rel="stylesheet" href="/css/p1.css">
+    <link rel="stylesheet" href="/css/lector.css">
 </head>
 <body>
 
     <!-- Barra de navegación superior fija -->
     <header class="netflix-navbar">
-        <div class="logo">
-            <img src="img/logo.jpeg" alt="Logo de ComicUam">
-        </div>
-        <nav class="nav-links">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="index.html#sec-destacados">Cómics</a></li>
-                <li><a href="index.html#sec-novedades">Novedades</a></li>
-                <li><a href="index.html#sec-milista">Mi Lista</a></li>
+        <!-- CORREGIDO: Ajustado para usar la clase navbar-left igual que en el inicio -->
+        <div class="navbar-left" style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 4%;">
+            <div class="logo">
+                <!-- CORREGIDO: Ruta absoluta para el logo -->
+                <img src="/img/logo.jpeg" alt="Logo de ComicUam" style="height: 40px;">
+            </div>
+            <ul class="nav-links" style="display: flex; list-style: none; gap: 20px;">
+                <!-- CORREGIDO: Rutas absolutas al index.html -->
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/#sec-destacados">Cómics</a></li>
+                <li><a href="/#sec-novedades">Novedades</a></li>
+                <li><a href="/#sec-milista">Mi Lista</a></li>
             </ul>
-        </nav>
+        </div>
     </header>
 
     <!-- Contenedor exclusivo del lector -->
-    <main class="reader-container">
+    <main class="reader-container" style="padding-top: 100px;">
         
         <!-- Título del Cómic con ID limpio -->
-        <h1 id="titulo-comic">Cargando Cómic...</h1>
+        <h1 id="titulo-comic" style="text-align: center; color: #fff;">Cargando Cómic...</h1>
 
         <!-- Caja de Sinopsis Estilizada -->
-        <div class="descripcion-box">
-            <h3>Sinopsis</h3>
+        <div class="descripcion-box" style="max-width: 700px; margin: 20px auto; padding: 15px; background: rgba(0,0,0,0.5); border-radius: 8px; color: #ccc;">
+            <h3 style="color: #fff; margin-top: 0;">Sinopsis</h3>
             <p id="comic-descripcion">Cargando descripción del cómic...</p>
         </div>
 
@@ -85,15 +89,41 @@
             }, 250); 
         }
 
-        // Función para renderizar la imagen correspondiente y actualizar el contador
+        // Función REPARADA basada en la estructura real de tus carpetas
         function actualizarVisor() {
-            // Formateamos el número de página a 5 dígitos (ej: 00001, 00002...)
-            const numeroFormateado = String(paginaActual).padStart(5, '0');
             const imagenImg = document.getElementById('pagina-actual-img');
-            
+            let numeroFormateado = '';
+
+            // CORRECCIÓN DE RUTAS: 
+            // Como todo está metido en 'mi_Comicdescargado' (excepto hulk), forzamos esa ruta si no es Hulk.
+            let rutaReal = rutaCarpeta;
+            if (!rutaCarpeta.includes('hulk')) {
+                rutaReal = '/assets/comics/mi_Comicdescargado';
+            }
+
+            // Identificamos el formato exacto del número de página según el cómic
+            if (prefijoArchivo.includes('Batman-163')) {
+                // Batman-163 tiene la pag 1 como "1.jpg" pero las siguientes podrían ser "0001", "0002" o "1", "2".
+                // Probamos primero con formato simple (1, 2, 3...) que es como llamaron al primer archivo
+                numeroFormateado = String(paginaActual); 
+            } else if (prefijoArchivo.includes('Infernal-Hulk') || prefijoArchivo.includes('Captain-America')) {
+                // Hulk y Capitán América usan 5 dígitos (00001, 00002...)
+                 numeroFormateado = String(paginaActual).padStart(5, '0');
+            } else if (prefijoArchivo.includes('The-Spectacular') || prefijoArchivo.includes('Nightwing')) {
+                // Spiderman y Nightwing usan 4 dígitos (0001, 0002...) o variantes de 4.
+                // Observando el archivo de Nightwing: "Nightwing-139-...-0001.jpg"
+                numeroFormateado = String(paginaActual).padStart(4, '0');
+            } else {
+                // Por si acaso, un fallback estándar
+                numeroFormateado = String(paginaActual);
+            }
+    
             // Construimos la ruta dinámica de la imagen
-            imagenImg.src = `${rutaCarpeta}/${prefijoArchivo}${numeroFormateado}.jpg`;
-            
+            const rutaFinal = `${rutaReal}/${prefijoArchivo}${numeroFormateado}.jpg`;
+            console.log("Intentando cargar:", rutaFinal); 
+    
+            imagenImg.src = rutaFinal;
+    
             // Actualizamos el contador de páginas inferior
             document.getElementById('info-pagina').innerText = `Página ${paginaActual} de ${totalPaginas}`;
 
@@ -101,6 +131,7 @@
             document.getElementById('btn-anterior').disabled = (paginaActual === 1);
             document.getElementById('btn-siguiente').disabled = (paginaActual === totalPaginas);
         }
+        
     </script>
 </body>
 </html>
