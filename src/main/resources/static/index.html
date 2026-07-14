@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="../static/css/p1.css">
     
     <style>
-        /* ========================================================
-           ✨ AJUSTES DE MENÚ EN COLOR NARANJA 🍊
-           ======================================================== */
-        
-        /* Asegura que toda la barra use Flexbox y centre todo verticalmente */
         .netflix-navbar {
             display: flex !important;
             align-items: center !important;
@@ -31,7 +26,6 @@
             gap: 20px !important; 
         }
 
-        /* Estilo base para los enlaces normales */
         .nav-links a {
             font-size: 1.05rem !important;
             font-weight: 500 !important;
@@ -41,38 +35,32 @@
             display: inline-block !important;
         }
 
-        /* Efecto al pasar el mouse por encima */
         .nav-links a:hover {
             color: #ffffff !important;
             transform: scale(1.05);
         }
 
-        /* 🍊 Resaltado en NARANJA para la pestaña activa en la que estás parado */
         .nav-links a.active {
             color: #ff6600 !important; 
             font-weight: 700 !important;
         }
 
-        /* 🍊 BOTÓN INICIAR SESIÓN EN COLOR NARANJA LLAMATIVO */
         .nav-links ul li:last-child a {
-            background-color: #ff6600 !important; /* Naranja ComicUAM */
+            background-color: #ff6600 !important; 
             color: white !important;
             padding: 7px 17px !important;
             border-radius: 4px !important;
             font-weight: 600 !important;
-            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3) !important; /* Sombra naranja */
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.3) !important; 
             transition: background 0.2s ease, transform 0.2s ease !important;
         }
 
-        /* Efecto hover exclusivo para Iniciar Sesión (Naranja un poco más oscuro) */
         .nav-links ul li:last-child a:hover {
             background-color: #cc5200 !important; 
             transform: translateY(-1px) !important;
         }
 
-        /* ========================================================
-           EFECTOS ANTERIORES (CONSERVADOS)
-           ======================================================== */
+    
         .hero-banner {
             transition: all 0.5s ease-in-out;
             max-height: 1000px;
