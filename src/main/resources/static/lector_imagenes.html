@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visor de Cómics - ComicUam</title>
+    
+    <link rel="stylesheet" href="../static/css/p1.css">
+</head>
+<body>
+
+    <div class="reader-container">
+        <h1 id="titulo-comic">Leyendo Cómic</h1>
+        
+        <div class="descripcion-box">
+            <h3>Sinopsis</h3>
+            <p id="texto-descripcion">Cargando descripción...</p>
+        </div>
+
+        <div class="image-viewer">
+            <!-- Imagen dinámica del cómic -->
+            <img id="pagina-actual-img" src="" alt="Página del cómic">
+            
+            <div class="controls">
+                <button id="btn-anterior" class="btn-nav" onclick="cambiarPagina(-1)">Anterior</button>
+                <span id="info-pagina">Página 1 de X</span>
+                <button id="btn-siguiente" class="btn-nav" onclick="cambiarPagina(1)">Siguiente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const rutaCarpeta = localStorage.getItem('../comics/mi_Comicdescargado/hulk/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00003.jpg');
+        const totalPaginas = parseInt(localStorage.getItem('comicTotalPaginas'));
+        const descripcionComic = localStorage.getItem('comicDescripcion');
+        const tituloComic = localStorage.getItem('comicTitulo');
+        const prefijo = localStorage.getItem('comicPrefijo');
+        
+        let paginaActual = 1;
+
+        function formatearNumero(num) {
+            return num.toString().padStart(5, '0'); 
+        }
+
+        function mostrarPagina() {
+            document.getElementById('texto-descripcion').textContent = descripcionComic;
+            document.getElementById('titulo-comic').textContent = tituloComic;
+
+            const nombreArchivo = `${prefijo}${formatearNumero(paginaActual)}.jpg`;
+            const rutaCompletaImagen = `${rutaCarpeta}/${nombreArchivo}`;
+            
+            document.getElementById('pagina-actual-img').src = rutaCompletaImagen;
+            document.getElementById('info-pagina').textContent = `Página ${paginaActual} de ${totalPaginas}`;
+            
+            document.getElementById('btn-anterior').disabled = (paginaActual === 1);
+            document.getElementById('btn-siguiente').disabled = (paginaActual === totalPaginas);
+        }
+
+        function cambiarPagina(direccion) {
+            const nuevaPagina = paginaActual + direccion;
+            
+            if (nuevaPagina >= 1 && nuevaPagina <= totalPaginas) {
+                paginaActual = nuevaPagina;
+                mostrarPagina();
+                window.scrollTo(0, 0);
+            }
+        }
+
+        if (rutaCarpeta && prefijo && totalPaginas > 0) {
+            mostrarPagina();
+        } else {
+            document.getElementById('texto-descripcion').textContent = "Error al intentar cargar la estructura del cómic.";
+            document.getElementById('pagina-actual-img').style.display = 'none';
+            document.getElementById('info-pagina').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

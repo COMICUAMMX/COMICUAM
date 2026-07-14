@@ -360,3 +360,115 @@ body {
 .register-link a:hover{
     text-decoration: underline;
 }
+.reader-container {
+    max-width: 900px;
+    margin: 90px auto 40px auto; /* 90px arriba para librar la navbar fija de 68px */
+    padding: 0 4%;
+    text-align: center;
+}
+
+/* Título dinámico del cómic */
+.reader-container h1 {
+    font-size: 2.5rem;
+    color: #e50914; /* El rojo oficial que usas en el botón login */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+/* Caja de la sinopsis / descripción */
+.descripcion-box {
+    background-color: rgba(0, 0, 0, 0.75); /* Negro traslúcido como tu login-container */
+    padding: 25px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    text-align: left;
+    border-left: 5px solid #e50914; /* Detalle en rojo */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.descripcion-box h3 {
+    margin: 0 0 10px 0;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.descripcion-box p {
+    margin: 0;
+    color: #e5e5e5;
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+/* Contenedor negro para centrar la imagen de la página */
+.image-viewer {
+    background-color: #000;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Mantiene la página del cómic dentro de la pantalla sin deformarse */
+#pagina-actual-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh;
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Barra inferior de controles (Botones y contador) */
+.controls {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Botones Anterior y Siguiente */
+.btn-nav {
+    background-color: #e50914;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-nav:hover {
+    background-color: #f4a906; /* Cambia al amarillo cuando pasas el mouse, como tu login */
+}
+
+.btn-nav:active {
+    transform: scale(0.96);
+}
+
+/* Estado bloqueado al llegar al inicio o fin del cómic */
+.btn-nav:disabled {
+    background-color: #333;
+    color: #777;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Contador de páginas */
+#info-pagina {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e5e5e5;
+    min-width: 150px;
+    text-align: center;
+}

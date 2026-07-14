@@ -31,10 +31,10 @@
             <div class="hero-content">
                 <h1 class="hero-title">COMICUAM</h1>
                 <p class="hero-description">
-                    los estudiantes de DSAGE requieren hacer proyectos para salvar el trimestre leyendo garfield.
+                    Los estudiantes de DSAGE requieren hacer proyectos para salvar el trimestre leyendo garfield.
                 </p>
                 <div class="hero-buttons">
-                    <a href="../assets/comics/mi_Comicdescargado/GARFIELDODIOLOSLUNES.pdf" class="btn btn-play">▶ Leer Ahora</a>
+                    <a href="../static/assets/comics/mi_Comicdescargado/GARFIELDODIOLOSLUNES.pdf" class="btn btn-play">▶ Leer Ahora</a>
                     <a href="#" class="btn btn-info">ⓘ Más Información</a>
                 </div>
             </div>
@@ -42,52 +42,83 @@
 
         <section class="comic-row">
             <h2>Cómics Destacados</h2>
+            
             <div class="comic-slider">
+                
+                <!-- Batman #163 -->
                 <div class="comic-card">
                     <img src="../static/assets/comics/mi_Comicdescargado/Batman-163-(2026)-(Digital)-(Pyrate-DCP)-0001 (1).jpg" alt="Comic 1">
                     <div class="card-hover-info">
                         <h4>Batman #163</h4>
-                        <button class="btn-card-read">Leer</button>
+                        <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/mi_Comicdescargado', 24, 'El caballero de la noche se enfrenta a un nuevo misterio en las calles de Gotham que pondrá a prueba sus habilidades de detective.', 'Batman-163-(2026)-(Digital)-(Pyrate-DCP)-')">Leer</button>
                     </div>
                 </div>
+
+                <!-- Infernal Hulk #007 -->
                 <div class="comic-card">
-                    <img src="../static/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Comic 2">
-                    <div class="card-hover-info">
-                        <h4>Infernal Hulk #007</h4>
-                        <button class="btn-card-read">Leer</button>
-                    </div>
-                </div>
+                  <img src="../static/assets/comics/mi_Comicdescargado/Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Comic 2">
+                      <div class="card-hover-info">
+                    <h4>Infernal Hulk #007</h4>
+                       
+                       <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/mi_Comicdescargado', 24, 'Bruce Banner enfrenta una de sus etapas más oscuras en esta entrega. La radiación gamma se sale de control mientras viejos enemigos acechan en las sombras.', 'Infernal-Hulk-007-(2026)-(Digital)-(Shan-Empire)-')">Leer</button>
+                     </div>
+                        </div>
+
+                <!-- Spiderman -->
                 <div class="comic-card">
                     <img src="../static/assets/comics/mi_Comicdescargado/The-Spectacular-Spider-Men-007-00000a.jpg" alt="Comic 3">
                     <div class="card-hover-info">
                         <h4>Spiderman</h4>
-                        <button class="btn-card-read">Leer</button>
+                        <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/mi_Comicdescargado', 24, 'Peter y Miles se unen en una espectacular aventura por los tejados de Nueva York, enfrentando una amenaza que pondrá a prueba su sincronía como equipo.', 'The-Spectacular-Spider-Men-007-')">Leer</button>
                     </div>
                 </div>
+
+                <!-- Nightwing -->
                 <div class="comic-card">
                     <img src="../static/assets/comics/mi_Comicdescargado/Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-0001.jpg" alt="Comic 4">
                     <div class="card-hover-info">
                         <h4>Nigtwing</h4>
-                        <button class="btn-card-read">Leer</button>
+                        <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/mi_Comicdescargado', 24, 'Dick Grayson lucha por mantener el orden en Blüdhaven mientras un nuevo sindicato del crimen intenta apoderarse de los muelles de la ciudad.', 'Nightwing-139-(2026)-(Digital)-(Pyrate-DCP)-')">Leer</button>
                     </div>
                 </div>
+
+                <!-- Capitan America -->
                 <div class="comic-card">
                     <img src="../static/assets/comics/mi_Comicdescargado/Captain-America-010-(2026)-(Digital)-(Shan-Empire)-00001.jpg" alt="Comic 5">
                     <div class="card-hover-info">
                         <h4>Capitan america</h4>
-                        <button class="btn-card-read">Leer</button>
+                        <button class="btn-card-read" onclick="verComicImagenes('../static/assets/comics/mi_Comicdescargado', 24, 'Steve Rogers porta el escudo en una misión global de alto espionaje político, cuestionando la verdadera justicia detrás de sus órdenes.', 'Captain-America-010-(2026)-(Digital)-(Shan-Empire)-')">Leer</button>
                     </div>
                 </div>
-            </div>
+
+            </div> 
         </section>
 
         <section class="comic-row">
             <h2>Tendencias de la Semana</h2>
             <div class="comic-slider">
-                </div>
+                
+            </div>
         </section>
 
     </main>
 
+   <script>
+
+function verComicImagenes(rutaCarpeta, totalPaginas, descripcion, prefijoArchivo) {
+    // Guarda los datos automáticamente en el navegador
+    localStorage.setItem('comicRutaCarpeta', rutaCarpeta);
+    localStorage.setItem('comicTotalPaginas', totalPaginas);
+    localStorage.setItem('comicDescripcion', descripcion);
+    localStorage.setItem('comicPrefijo', prefijoArchivo); 
+    
+    // Genera un título limpio (ej: "Infernal Hulk")
+    const tituloLimpio = prefijoArchivo.split('-').slice(0, 2).join(' ');
+    localStorage.setItem('comicTitulo', tituloLimpio);
+    
+    // Abre el visualizador en una nueva pestaña
+    window.open('../static/lector_imagenes.html', '_blank');
+}
+</script>
 </body>
 </html>
