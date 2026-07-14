@@ -1,3 +1,5 @@
+package com.dsge.comicuam.servicios;
+
 public class Catalogo{
 
     private String genero;
