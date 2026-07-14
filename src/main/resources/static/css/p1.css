@@ -83,9 +83,13 @@ body {
    ========================================== */
 .hero-banner {
     position: relative;
-    height: 85vh;
-    color: #fff;
-    margin-bottom: 20px;
+    width: 100%;
+    height: 75vh;             /* Altura fija para que no floten las cosas a los lados */
+    display: flex;
+    align-items: center;
+    padding-left: 4%;
+    margin-bottom: 40px;      /* Espacio obligatorio para empujar las tarjetas abajo */
+    background-color: #000;
 }
 
 .hero-background {
@@ -105,15 +109,62 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, rgba(0,0,0,0.6) 30%, transparent 70%),
-                linear-gradient(to top, #141414, transparent 50%);
-    z-index: -1;
+    background: linear-gradient(to right, rgba(20, 20, 20, 0.8) 30%, transparent 70%),
+                linear-gradient(to top, #141414 10%, transparent 40%);
+    z-index: 1; /* Mantiene el degradado visible detrás del texto */
 }
 
 .hero-content {
-    padding-left: 4%;
-    padding-top: 25vh;
+    position: relative;
+    z-index: 2;               /* Asegura que el texto y botones queden encima de la capa */
     max-width: 600px;
+    margin-top: 80px;
+}
+.comic-row {
+    width: 100%;
+    padding: 0 4%;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 5; /* Asegura que se dibuje por encima de cualquier fondo residual */
+    clear: both; /* Rompe cualquier flotado extraño anterior */
+}
+.comic-card {
+    flex-shrink: 0;
+    width: 200px;             /* Ancho fijo para que no se desborden */
+    height: 300px;            /* Alto proporcional */
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.comic-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* Evita que la portada se deforme o aplaste */
+    border-radius: 4px;
+    display: block;
+}
+.comic-card:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+.comic-slider {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 15px;
+    padding: 15px 0;
+    align-items: flex-start;  /* Evita que se estire verticalmente dejando huecos */
+}
+.comic-slider::-webkit-scrollbar {
+    display: none;
+}
+.comic-row h2 {
+    font-size: 1.5rem;
+    color: #e5e5e5;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .hero-title {
@@ -217,13 +268,13 @@ body {
    LOGIN
    ========================================== */
 
-.main-container{
-    width: 100%;
-    min-height: 100vh;
+.main-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 80px; /* Evita que el navbar tape el contenido */
+    flex-direction: column;
+    width: 100%;
+    background-color: #141414;
+    /* Dejamos un margen arriba para que la navbar fija de 68px no tape el contenido */
+    padding-top: 0; 
 }
 
 .login-container{
@@ -307,24 +358,5 @@ body {
 }
 
 .register-link a:hover{
-    text-decoration: underline;
-}
-
-.recuperar-contrasenia-link{
-    margin-top: 25px;
-    text-align: center;
-}
-
-.recuperar-contrasenia-link p{
-    color: #b3b3b3;
-}
-
-.recuperar-contrasenia-link a{
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.recuperar-contrasenia-link a:hover{
     text-decoration: underline;
 }
